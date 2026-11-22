@@ -1,0 +1,148 @@
+# ---------------------------------------------------------------
+# WorthEditor config
+# ---------------------------------------------------------------
+
+# Path to the worth file your shop plugin reads, relative to the SERVER ROOT.
+# CHANGE THIS to the real location of your worth.yml.
+worth-file: "plugins/UltimateDonutSmp/worth.yml"
+
+# Command run from console after the worth file is saved so your shop plugin
+# re-reads it (e.g. "shop reload"). Leave empty to disable.
+reload-command: ""   # e.g. "ultimatedonutsmp reload" - check what your plugin uses
+
+engine:
+  # Crafted item value = sum of ingredient values * this / amount crafted.
+  # 1.0 means crafting never makes or loses money (no loops).
+  craft-factor: 1.0
+  # Smelted/cooked value = input value * this.
+  smelt-factor: 1.1
+  # Items with no raw value and no recipe keep the price they had the first
+  # time the plugin saw them (their "baseline").
+
+dynamic:
+  # Enabled/disabled from the GUI too. This is only the default.
+  enabled: false
+  # How often prices are recalculated and saved.
+  interval-minutes: 60
+  # multiplier = base - slope * log10(1 + pressure), clamped to [min, max]
+  # pressure = recorded sales + inventory-weight * amount held by online players.
+  # Plentiful items drift down, scarce items drift up.
+  base: 1.25
+  slope: 0.15
+  min: 0.6
+  max: 1.5
+  inventory-weight: 0.05
+  # Sales pressure is multiplied by this every cycle (older sales matter less).
+  sales-decay: 0.8
+  broadcast: false
+
+# Keeps sell prices BELOW what the shop charges to buy things, so nobody can
+# buy -> sell (or buy -> craft -> sell) for profit. Applied by auto-balance and
+# every dynamic cycle. It only ever lowers prices.
+shop-cap:
+  enabled: true
+  # The shop plugin's file(s) holding BUY prices (relative to the server root).
+  # CHANGE THIS. Run /worthedit shopcheck to see how many buy prices were read.
+  buy-files:
+    - "plugins/UltimateDonutSmp/shop.yml"
+  # Sell price may be at most this fraction of the buy price (0.8 = 20% gap).
+  sell-ratio: 0.8
+  # Manual buy prices, win over the shop file. MATERIAL: price
+  buy-prices: {}
+
+# Sell values for "base" items (things not crafted from other items).
+# Crafted items are derived from these through the server's recipes.
+# These are a starting point, edit freely.
+raw-values:
+  # Terrain
+  COBBLESTONE: 0.5
+  DIRT: 0.25
+  SAND: 0.5
+  GRAVEL: 0.5
+  NETHERRACK: 0.25
+  END_STONE: 0.5
+  OBSIDIAN: 8
+  CLAY_BALL: 1
+  SNOWBALL: 0.25
+  # Wood
+  OAK_LOG: 2
+  SPRUCE_LOG: 2
+  BIRCH_LOG: 2
+  JUNGLE_LOG: 2
+  ACACIA_LOG: 2
+  DARK_OAK_LOG: 2
+  MANGROVE_LOG: 2
+  CHERRY_LOG: 2
+  PALE_OAK_LOG: 2
+  BAMBOO: 0.5
+  CRIMSON_STEM: 2
+  WARPED_STEM: 2
+  # Ores and gems
+  COAL: 4
+  CHARCOAL: 3
+  RAW_IRON: 8
+  IRON_INGOT: 10
+  RAW_COPPER: 3
+  COPPER_INGOT: 4
+  RAW_GOLD: 10
+  GOLD_INGOT: 12
+  DIAMOND: 150
+  EMERALD: 60
+  LAPIS_LAZULI: 3
+  REDSTONE: 2
+  QUARTZ: 4
+  AMETHYST_SHARD: 6
+  ANCIENT_DEBRIS: 1400
+  NETHERITE_SCRAP: 1500
+  ECHO_SHARD: 300
+  RESIN_CLUMP: 3
+  # Mob drops
+  BONE: 1
+  STRING: 1
+  GUNPOWDER: 3
+  ROTTEN_FLESH: 0.5
+  SPIDER_EYE: 1
+  ENDER_PEARL: 25
+  BLAZE_ROD: 15
+  GHAST_TEAR: 120
+  SLIME_BALL: 4
+  LEATHER: 4
+  FEATHER: 1
+  INK_SAC: 2
+  GLOW_INK_SAC: 10
+  PHANTOM_MEMBRANE: 20
+  SHULKER_SHELL: 250
+  PRISMARINE_SHARD: 3
+  PRISMARINE_CRYSTALS: 5
+  BREEZE_ROD: 40
+  HEART_OF_THE_SEA: 800
+  NAUTILUS_SHELL: 100
+  NETHER_STAR: 8000
+  TOTEM_OF_UNDYING: 3000
+  # Farming and food
+  WHEAT: 2
+  WHEAT_SEEDS: 0.25
+  CARROT: 1.5
+  POTATO: 1.5
+  BEETROOT: 1
+  SUGAR_CANE: 1
+  PUMPKIN: 3
+  MELON_SLICE: 0.5
+  KELP: 0.5
+  CACTUS: 1
+  COCOA_BEANS: 2
+  NETHER_WART: 3
+  SWEET_BERRIES: 1
+  APPLE: 4
+  BEEF: 3
+  PORKCHOP: 2
+  CHICKEN: 2
+  MUTTON: 2
+  RABBIT: 3
+  COD: 2
+  SALMON: 3
+  EGG: 1
+  HONEYCOMB: 6
+  GLOWSTONE_DUST: 4
+  CHORUS_FRUIT: 6
+  SEA_PICKLE: 2

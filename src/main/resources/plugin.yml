@@ -1,0 +1,14 @@
+name: WorthEditor
+version: 1.0.0
+main: com.example.worthedit.WorthEditor
+api-version: '1.21'
+description: In-game GUI for editing worth.yml with auto-balance and dynamic pricing.
+commands:
+  worthedit:
+    description: Open the worth editor
+    usage: /worthedit [gui|save|reload|autobalance|shopcheck|dynamic|sold|set]
+    permission: worthedit.admin
+permissions:
+  worthedit.admin:
+    description: Use the worth editor
+    default: op
